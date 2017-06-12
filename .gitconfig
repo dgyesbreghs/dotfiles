@@ -1,0 +1,29 @@
+[user]
+	name = Dylan Gyesbreghs
+	email = dgyesbreghs@gmail.com
+
+#driver for merging Xcode project files
+[mergetool "mergepbx"]
+    cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+[mergetool]
+	keepBackup = false
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[core]
+	excludesfile = /Users/dgyesbreghs/.gitignore_global
+	editor = /usr/bin/vim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
